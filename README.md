@@ -2,7 +2,7 @@
 
 A library for type-level Symbol formatting with other Symbols, e.g. intercalated record labels.
 
-![](https://i.imgur.com/VtZIfff.jpg)
+![](https://i.imgur.com/EtAGHnK.jpg)
 
 Who doesn't love shoronpo/xiaolongbao?
 
