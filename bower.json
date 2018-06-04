@@ -1,5 +1,10 @@
 {
   "name": "purescript-shoronpo",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/justinwoo/purescript-shoronpo.git"
+  },
   "ignore": [
     "**/.*",
     "node_modules",
