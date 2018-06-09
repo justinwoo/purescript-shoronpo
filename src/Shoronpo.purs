@@ -4,7 +4,7 @@ import Prim.Row as Row
 import Prim.RowList as RL
 import Prim.Symbol as Symbol
 import Record.Format as RF
-import Type.Prelude (Proxy, RProxy, SProxy(..))
+import Type.Prelude (Proxy, SProxy(..))
 
 formatSymbol
   :: forall string flist row out proxyOrRec
@@ -32,9 +32,9 @@ instance consLitFormatSymbolParsed ::
   ) => FormatSymbolParsed (RF.FCons (RF.Lit lit) tail) row acc out
 
 intercalateRowLabels
-  :: forall row x out
+  :: forall row x out proxyOrRecord
    . IntercalateRowLabels row x out
-  => RProxy row
+  => proxyOrRecord row
   -> SProxy x
   -> SProxy out
 intercalateRowLabels _ _ = SProxy
