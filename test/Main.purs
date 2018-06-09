@@ -9,15 +9,22 @@ import Test.Assert (assertEqual)
 import Type.Prelude (Proxy(..), SProxy(..), reflectSymbol)
 
 type MyRecord =
-  { a :: Int
-  , b :: String
-  , c :: Unit
+  { a :: SProxy "A"
+  , b :: SProxy "B"
+  , c :: SProxy "C"
   }
 
 -- inferred type:
 labels :: SProxy "a, b, c"
 labels =
   S.intercalateRecordLabels
+    (Proxy :: Proxy MyRecord)
+    (SProxy :: SProxy ", ")
+
+-- inferred type:
+values :: SProxy "A, B, C"
+values =
+  S.intercalateRecordValues
     (Proxy :: Proxy MyRecord)
     (SProxy :: SProxy ", ")
 

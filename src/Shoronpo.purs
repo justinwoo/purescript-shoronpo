@@ -68,3 +68,41 @@ else instance consIntercalateRowLabelsImpl ::
   , Symbol.Append acc s acc'
   , IntercalateRowLabelsImpl tail x acc' out
   ) => IntercalateRowLabelsImpl (RL.Cons name ty tail) x acc out
+
+intercalateRowValues
+  :: forall row x out proxyOrRecord
+   . IntercalateRowValues row x out
+  => proxyOrRecord row
+  -> SProxy x
+  -> SProxy out
+intercalateRowValues _ _ = SProxy
+
+intercalateRecordValues
+  :: forall row x out
+   . IntercalateRowValues row x out
+  => Proxy { | row }
+  -> SProxy x
+  -> SProxy out
+intercalateRecordValues _ _ = SProxy
+
+class IntercalateRowValues (row :: # Type) (x :: Symbol) (out :: Symbol)
+
+instance intercalateRowValuesInstance ::
+  ( RL.RowToList row rl
+  , IntercalateRowValuesImpl rl x "" out
+  ) => IntercalateRowValues row x out
+
+class IntercalateRowValuesImpl (rl :: RL.RowList) (x :: Symbol) (acc :: Symbol) (out :: Symbol)
+  | rl -> x out
+
+instance nilIntercalateRowValuesImpl :: IntercalateRowValuesImpl RL.Nil x out out
+
+instance consNilIntercalateRowValuesImpl ::
+  ( Symbol.Append acc value acc'
+  ) => IntercalateRowValuesImpl (RL.Cons name (SProxy value) RL.Nil) x acc acc'
+
+else instance consIntercalateRowValuesImpl ::
+  ( Symbol.Append value x s
+  , Symbol.Append acc s acc'
+  , IntercalateRowValuesImpl tail x acc' out
+  ) => IntercalateRowValuesImpl (RL.Cons name (SProxy value) tail) x acc out
