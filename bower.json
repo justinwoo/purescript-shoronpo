@@ -12,10 +12,10 @@
     "output"
   ],
   "dependencies": {
-    "purescript-prelude": "^4.0.0",
-    "purescript-record-format": "^0.1.0"
+    "purescript-prelude": "^5.0.1",
+    "purescript-record-format": "^3.0.0"
   },
   "devDependencies": {
-    "purescript-assert": "^4.0.0"
+    "purescript-assert": "^5.0.0"
   }
 }

@@ -15,7 +15,7 @@ formatSymbol
   -> SProxy out
 formatSymbol _ _ = SProxy
 
-class FormatSymbolParsed (flist :: RF.FList) (row :: # Type) (acc :: Symbol) (out :: Symbol)
+class FormatSymbolParsed (flist :: RF.FList) (row :: Row Type) (acc :: Symbol) (out :: Symbol)
   | flist -> row acc out
 
 instance nilFormatSymbolParsed :: FormatSymbolParsed RF.FNil row out out
@@ -47,14 +47,14 @@ intercalateRecordLabels
   -> SProxy out
 intercalateRecordLabels _ _ = SProxy
 
-class IntercalateRowLabels (row :: # Type) (x :: Symbol) (out :: Symbol)
+class IntercalateRowLabels (row :: Row Type) (x :: Symbol) (out :: Symbol)
 
 instance intercalateRowLabelsInstance ::
   ( RL.RowToList row rl
   , IntercalateRowLabelsImpl rl x "" out
   ) => IntercalateRowLabels row x out
 
-class IntercalateRowLabelsImpl (rl :: RL.RowList) (x :: Symbol) (acc :: Symbol) (out :: Symbol)
+class IntercalateRowLabelsImpl (rl :: RL.RowList Type) (x :: Symbol) (acc :: Symbol) (out :: Symbol)
   | rl -> x out
 
 instance nilIntercalateRowLabelsImpl :: IntercalateRowLabelsImpl RL.Nil x out out
@@ -85,14 +85,14 @@ intercalateRecordValues
   -> SProxy out
 intercalateRecordValues _ _ = SProxy
 
-class IntercalateRowValues (row :: # Type) (x :: Symbol) (out :: Symbol)
+class IntercalateRowValues (row :: Row Type) (x :: Symbol) (out :: Symbol)
 
 instance intercalateRowValuesInstance ::
   ( RL.RowToList row rl
   , IntercalateRowValuesImpl rl x "" out
   ) => IntercalateRowValues row x out
 
-class IntercalateRowValuesImpl (rl :: RL.RowList) (x :: Symbol) (acc :: Symbol) (out :: Symbol)
+class IntercalateRowValuesImpl (rl :: RL.RowList Type) (x :: Symbol) (acc :: Symbol) (out :: Symbol)
   | rl -> x out
 
 instance nilIntercalateRowValuesImpl :: IntercalateRowValuesImpl RL.Nil x out out
